@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'vlaship'
-version '1.0.2'
+version '1.0.3'
 
 sourceCompatibility = 11
 
@@ -24,5 +24,8 @@ dependencies {
 jar {
     manifest {
         attributes "Main-Class": "vlaship.parser.Parser"
+    }
+	from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
