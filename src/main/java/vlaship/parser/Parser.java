@@ -1,29 +1,43 @@
 package vlaship.parser;
 
-import java.io.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class Parser {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(Parser.class);
+
     public static void main(String[] args) {
 
+        LOGGER.info("Robocopy log Parser");
+
         if (args.length < 2) {
-            System.out.println("Run java -jar parser.jar input-file output-file");
+            LOGGER.info("Run java -jar parser.jar input-file output-file");
             return;
         }
 
         final String inputFile = args[0];
         final String outputFile = args[1];
 
+        LOGGER.info("Input file: {}", inputFile);
+        LOGGER.info("Output file: {}", outputFile);
+
         try {
             final List<String> lines = readFile(inputFile);
             final String parse = parse(lines);
             writeFile(parse, outputFile);
-            System.out.println("File '" + outputFile + "' is created.");
-        } catch (IOException ex) {
-            System.err.println(ex);
+            LOGGER.info("File '{}' is created.", outputFile);
+
+            LOGGER.info("{}{}","Output\n",parse);
+
+        } catch (IOException | IllegalStateException ex) {
+            LOGGER.error("{} {}", ex.getClass().getSimpleName(), ex.getMessage());
         }
     }
 
