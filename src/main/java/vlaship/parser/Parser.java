@@ -23,7 +23,7 @@ public class Parser {
             writeFile(parse, outputFile);
             System.out.println("File '" + outputFile + "' is created.");
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+            System.err.println(ex);
         }
     }
 
@@ -33,16 +33,15 @@ public class Parser {
 
     private static String parse(final List<String> lines) {
 
-        return lines.get(1).trim() + "\n" +
-                lines.get(5).trim() + "\n" +
-                lines.get(7).trim() + "\n" +
-                lines.get(8).trim() + "\n" +
-                lines.get(lines.size() - 10).trim() + "\n" +
-                lines.get(lines.size() - 9).trim() + "\n" +
-                lines.get(lines.size() - 8).trim() + "\n" +
-                lines.get(lines.size() - 6).trim() + "\n" +
-                lines.get(lines.size() - 1).trim() + "\n" +
-                lines.get(1).trim();
+        return lines.get(1) + "\n" +
+                lines.get(5).substring(2, lines.get(5).length() - 1) + "\n" +
+                lines.get(7).substring(2, lines.get(7).length() - 1) + "\n" +
+                lines.get(8).substring(2, lines.get(8).length() - 1) + "\n" +
+                lines.get(lines.size() - 10).substring(2, lines.get(lines.size() - 10).length() - 1) + "\n" +
+                lines.get(lines.size() - 9).substring(2, lines.get(lines.size() - 9).length() - 1) + "\n" +
+                lines.get(lines.size() - 8).substring(2, lines.get(lines.size() - 8).length() - 1) + "\n" +
+                lines.get(lines.size() - 1).substring(2, lines.get(lines.size() - 1).length() - 1) + "\n" +
+                lines.get(1);
     }
 
     private static List<String> readFile(final String fileName) throws IOException {
