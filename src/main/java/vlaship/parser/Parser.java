@@ -34,7 +34,7 @@ public class Parser {
             writeFile(parse, outputFile);
             LOGGER.info("File '{}' is created.", outputFile);
 
-            LOGGER.info("{}{}","Output\n",parse);
+            LOGGER.info("{}{}", "Output\n", parse);
 
         } catch (IOException | IllegalStateException ex) {
             LOGGER.error("{} {}", ex.getClass().getSimpleName(), ex.getMessage());
@@ -55,7 +55,8 @@ public class Parser {
                 lines.get(lines.size() - 9).substring(2, lines.get(lines.size() - 9).length() - 1) + "\n" +
                 lines.get(lines.size() - 8).substring(2, lines.get(lines.size() - 8).length() - 1) + "\n" +
                 lines.get(lines.size() - 1).substring(2, lines.get(lines.size() - 1).length() - 1) + "\n" +
-                lines.get(1);
+                lines.get(1) + "\n" +
+                lines.stream().filter(x -> x.contains("ERROR")).reduce((x1, x2) -> x1 + "\n" + x2).orElse("");
     }
 
     private static List<String> readFile(final String fileName) throws IOException {
